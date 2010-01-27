@@ -1,22 +1,21 @@
 #include "wheeler.h"
-#include <malloc.h>
+#include <stdlib.h>
 #include <R.h>
 #include <Rmath.h>
 
-
-
-void permute(long* result, long* N, long* K, long* vec, long* initialize, long* count);
-void permuteSPR(long* Ni, long* nci, double* Y, double* Q, long* nSi, long* dof, long* Mi, 
-			long* Mn, long* Mnt,double* p0,	double* p1, double* alpha, double* beta, long* accept, 
-			double* P, long* acceptt, double* Pt, long* nCyclei);
-void permuteExact(long* Ni, long* nci, double* Y, double* Q, long* nSi, long* dof, double* P,
+void permute(int* result, int* N, int* K, int* vec, int* initialize, int* count);
+void permuteSPR(int* Ni, int* nci, double* Y, double* Q, int* nSi, int* dof, int* Mi, 
+			int* Mn, int* Mnt,double* p0,	double* p1, double* alpha, double* beta, int* accept, 
+			double* P, int* acceptt, double* Pt, int* nCyclei);
+void permuteExact(int* Ni, int* nci, double* Y, double* Q, int* nSi, int* dof, double* P,
 				  double* Pt,double* totPermi);
-void permuteProb(long* Ni, long* nci, double* Y, double* Q, long* nSi, long* dof, double* ci,long* Mi, 
-			long* Mn, double* P,long *Mnt, double* Pt, long* nCyclei);
+void permuteProb(int* Ni, int* nci, double* Y, double* Q, int* nSi, int* dof, double* ci,int* Mi, 
+			int* Mn, double* P,int *Mnt, double* Pt, int* nCyclei);
 void	permuteRand(double** Y,int n);
 
 
 #define tol 1e-8
+
 
 
 #define N (*Ni)
@@ -68,25 +67,25 @@ bool DllMain(void)
 * initialize should be 1 on the first access, and 0 susequently
 ***********/
 void permute(
-	long* result,  /* return value */
-	long* Ni,        /* number of items to permute */
-	long* K,
-	long* vec,		/* dim 2*K, for K pairs at a time */
-	long* initialize,    /* 1 initialize; 0 continue*/
-	long* count     /* number of pairs actually returned*/
+	int* result,  /* return value */
+	int* Ni,        /* number of items to permute */
+	int* K,
+	int* vec,		/* dim 2*K, for K pairs at a time */
+	int* initialize,    /* 1 initialize; 0 continue*/
+	int* count     /* number of pairs actually returned*/
 )
 {
-	long i;
-	long temp;
-	long a;
-	long b;
-	long n=(*Ni);
-	long k=(*K);
-	long lcount=0;
-	static long p[100];
-	static long pi[100];
-	static long d[100];
-	static long m;
+	int i;
+	int temp;
+	int a;
+	int b;
+	int n=(*Ni);
+	int k=(*K);
+	int lcount=0;
+	static int p[100];
+	static int pi[100];
+	static int d[100];
+	static int m;
 
 
 	if (k<1 || n<2) {
@@ -167,12 +166,12 @@ finishUp:
 
 
 void permuteExact(
-	long* Ni,	   /* scalar number of observations in Y*/
-	long* nci,     /* scalar number of columns in Y */
+	int* Ni,	   /* scalar number of observations in Y*/
+	int* nci,     /* scalar number of columns in Y */
 	double* Y,	   /* nc*N matrix of responses */
 	double* Q,     /* N*K matrix of linear functionals in row major form */
-	long* nSi,      /* scalar number of sources into which the functionals are divided */
-	long* dof,     /* nS vector of df for the sources: K=sum(df) */
+	int* nSi,      /* scalar number of sources into which the functionals are divided */
+	int* dof,     /* nS vector of df for the sources: K=sum(df) */
 	double* P,      /* nc*nS vector of observed p values at termination*/
     double* Pt,     /* a nc*K vector of observed p values for the terms at termination*/
 	double* totPermi   /* total number of permutatons */
@@ -182,19 +181,19 @@ void permuteExact(
 	double* oSS;  /* nc*nS matrix of Sum of squares of observations */
 	double* b;   /* nc*K matrix of term estimates */
 	double* obSq;  /* nc*K matrix of square of original estimates */
-	long* pairs; /* vector of Kp permuted pairs, Note it is 2*Kp in length.*/
-	long* dVec;   /* nc*nSe matrix of number of source exceedences */
-	long* dVect;   /* nc*Kt matrix of number of term exceedences */
+	int* pairs; /* vector of Kp permuted pairs, Note it is 2*Kp in length.*/
+	int* dVec;   /* nc*nSe matrix of number of source exceedences */
+	int* dVect;   /* nc*Kt matrix of number of term exceedences */
 	double* rss; /* residual sum of squares */
-	long K=0;       /* total number of terms */
-	long Kt=0;	 /* number of non residual terms */
-	long Kp=5000;
+	int K=0;       /* total number of terms */
+	int Kt=0;	 /* number of non residual terms */
+	int Kp=5000;
 	int i;
 	int j;
 	int k;
 	int u1;
 	int u2;
-	long iter;
+	int iter;
 	double temp;
 	double y;
 	double x;
@@ -203,11 +202,11 @@ void permuteExact(
 	double x1;
 	double x2;
 	double delta;
-	long count=0;
-	long result=0;
-	long initialize=1;
+	int count=0;
+	int result=0;
+	int initialize=1;
 	bool useF=true;  /* Use F ratio instead of SS */
-	long nSe=nS-1;   /* Number of effects */
+	int nSe=nS-1;   /* Number of effects */
 
 
 	int l;
@@ -216,8 +215,8 @@ void permuteExact(
 	double* oSSp;
 	double* obSqp;
 	double* SSp;
-	long* dVecp;
-	long* dVectp;
+	int* dVecp;
+	int* dVectp;
 	double* Pp;
 	double* Ptp;
 
@@ -232,11 +231,11 @@ void permuteExact(
 	Kt=K-dof[nSe];
 	SS=(double *)S_alloc(nc*nS,sizeof(double)); /* if !useF, unused cell on end for do loops */
 	oSS=(double *)S_alloc(nc*nS,sizeof(double)); /* if !useF, unused cell on end for do loops */
-	dVec=(long *)S_alloc(nc*nSe,sizeof(long));
-	dVect=(long *)S_alloc(nc*Kt,sizeof(long));
+	dVec=(int *)S_alloc(nc*nSe,sizeof(int));
+	dVect=(int *)S_alloc(nc*Kt,sizeof(int));
 	b=(double *)S_alloc(nc*K,sizeof(double));
 	obSq=(double *)S_alloc(nc*K,sizeof(double));
-	pairs=(long *)S_alloc(2*Kp,sizeof(long));
+	pairs=(int *)S_alloc(2*Kp,sizeof(int));
 	rss=(double *)S_alloc(nc,sizeof(double));
 
 
@@ -400,34 +399,34 @@ void permuteExact(
 
 
 void permuteProb(
-	long* Ni,	   /* scalar number of observations in Y*/
-	long* nci,     /* scalar Number of Y columns */
+	int* Ni,	   /* scalar number of observations in Y*/
+	int* nci,     /* scalar Number of Y columns */
 	double* Y,	   /* nc*N matrix of responses */
 	double* Q,     /* NxK matrix of linear functionals in row major form */
-	long* nSi,      /* scalar number of sources into which the functionals are divided */
-	long* dof,     /* nS vector of df for the sources: K=sum(df) */
+	int* nSi,      /* scalar number of sources into which the functionals are divided */
+	int* dof,     /* nS vector of df for the sources: K=sum(df) */
 	double* ci,    /* scalar proportion */
-	long* Mi,       /* scalar maximum limit on the number of iterations*/
-	long* Mn,      /* nc*nSe matrix of sample sizes at termination */
+	int* Mi,       /* scalar maximum limit on the number of iterations*/
+	int* Mn,      /* nc*nSe matrix of sample sizes at termination */
 	double* P,      /* nc*nS matrix of observed p values for the sources at termination*/
-	long* Mnt,     /* nc*K matrix of sample sizes for the terms at termination */
+	int* Mnt,     /* nc*K matrix of sample sizes for the terms at termination */
     double* Pt,     /* nc*K vector of observed p values for the terms at termination*/
-	long* nCyclei    /* complete permutation every nCycle*N iterations*/
+	int* nCyclei    /* complete permutation every nCycle*N iterations*/
 )
 {
 	double* SS;  /* nc*nS matrix of current sum of squares */
 	double* oSS; /* nc*nS matrix of Original SS */
 	double* b;   /* nc*K matrix of term estimates */
 	double* obSq;  /* nc*K matrix of square of original estimates */
-	long* d;   /* nc*nS matrix of number of exceedences */
-	long* dt;   /* nc*K matrix of number of exceedences for the terms */
+	int* d;   /* nc*nS matrix of number of exceedences */
+	int* dt;   /* nc*K matrix of number of exceedences for the terms */
 	bool* accept; /* nc*nS matrix True when the corresponding source and all its terms have met goal*/
 	int* acceptC; /* nc*Nx marrix Count of the number of terms in a source that have met goal */
 	bool* acceptt; /* nc*K True when the corresponding term has met goal */
 	double* rss;  /* Residual sum of squares */
 	double crit;   /* 1/(iter*Cs+1) */
-	long K=0;       /* total number of terms */
-	long Kt=0;      /* total non residual terms */
+	int K=0;       /* total number of terms */
+	int Kt=0;      /* total non residual terms */
 	double cs=c*c;
 	double p;
 	int i;
@@ -446,7 +445,7 @@ void permuteProb(
 	double delta;
 	bool nToDo; /* number of sources not decided */
 	bool useF=true;  /* Use F ratio instead of SS */
-	long nSe=nS-1;   /* Number of effects */
+	int nSe=nS-1;   /* Number of effects */
 
 	int l;
 	double* Yp;
@@ -454,15 +453,15 @@ void permuteProb(
 	double* oSSp;
 	double* obSqp;
 	double* SSp;
-	long* dp;
-	long* dtp;
+	int* dp;
+	int* dtp;
 	double* Pp;
 	double* Ptp;
 	bool* acceptp;
 	int* acceptCp;
 	bool* accepttp;
-	long* Mnp;
-	long* Mntp;
+	int* Mnp;
+	int* Mntp;
 
 
 	for (i=0;i<nS;i++) /* find number of columns in Q */
@@ -478,11 +477,11 @@ void permuteProb(
 
 	SS=(double *)S_alloc(nc*nS,sizeof(double));  /* These should be zeroed as allocated */
 	oSS=(double *)S_alloc(nc*nS,sizeof(double));
-	d=(long *)S_alloc(nc*nSe,sizeof(long));
+	d=(int *)S_alloc(nc*nSe,sizeof(int));
 	accept=(bool *)S_alloc(nc*nS,sizeof(bool));
 	b=(double *)S_alloc(nc*K,sizeof(double));
 	obSq=(double *)S_alloc(nc*K,sizeof(double));
-	dt=(long *)S_alloc(nc*Kt,sizeof(long));
+	dt=(int *)S_alloc(nc*Kt,sizeof(int));
 	acceptC=(int *)S_alloc(nc*nS,sizeof(int));
 	acceptt=(bool *)S_alloc(nc*Kt,sizeof(bool));
 	rss=(double *)S_alloc(nc,sizeof(double));
@@ -697,24 +696,24 @@ void permuteProb(
 
 
 void permuteSPR(
-	long* Ni,	   /* scalar number of observations in Y*/
-	long* nci,     /* scalar number of of columns in Y */
+	int* Ni,	   /* scalar number of observations in Y*/
+	int* nci,     /* scalar number of of columns in Y */
 	double* Y,	   /* nc*Nx matrix  of responses */
 	double* Q,     /* NxK matrix of linear functionals in row major form */
-	long* nSi,      /* scalar number of sources into which the functionals are divided */
-	long* dof,     /* nS vector of df for the sources: K=sum(df) */
-	long* Mi,       /* scalar maximum limit on the number of iterations*/
-	long* Mn,      /* nc*nS matrix of sample sizes at termination */
-	long* Mnt,     /* nc*K matrix of sample sizes for the terms at termination */
+	int* nSi,      /* scalar number of sources into which the functionals are divided */
+	int* dof,     /* nS vector of df for the sources: K=sum(df) */
+	int* Mi,       /* scalar maximum limit on the number of iterations*/
+	int* Mn,      /* nc*nS matrix of sample sizes at termination */
+	int* Mnt,     /* nc*K matrix of sample sizes for the terms at termination */
 	double* p0,    /* scalar null hyp p value */
 	double* p1,    /* scalar alternative hyp p value */
 	double* alpha, /* scalar test size */
 	double* beta,  /* scalar type II size */
-	long* accept,  /* nc*nS matrix:  -1: rejected, 0: undecided, 1: accepted */
+	int* accept,  /* nc*nS matrix:  -1: rejected, 0: undecided, 1: accepted */
 	double* P,      /* nc*nS matrix of observed p values at termination*/
- 	long* acceptt,  /* nc*nS matrix:  -1: rejected, 0: undecided, 1: accepted */
+ 	int* acceptt,  /* nc*nS matrix:  -1: rejected, 0: undecided, 1: accepted */
 	double* Pt,     /* nc*K matrix  of observed p values for the terms at termination*/
-	long* nCyclei    /* complete permutation every nCycle*N iterations*/
+	int* nCyclei    /* complete permutation every nCycle*N iterations*/
 )
 {
 	double an;  /* acceptance number an+m*rn */
@@ -724,12 +723,12 @@ void permuteSPR(
 	double* oSS;  /* nc*nS matrix of Sum of squares of observations */
 	double* b;   /* nc*K matrix of term estimates */
 	double* obSq;  /* nc*K matrix of square of original estimates */
-	long* d;   /* nc*nS matrix of number of exceedences */
-	long* dt;   /* nc*K matrix of number of exceedences for the terms */
+	int* d;   /* nc*nS matrix of number of exceedences */
+	int* dt;   /* nc*K matrix of number of exceedences for the terms */
 	int* acceptC; /* nc*nS matrix of the count of the number of terms in a source that have been decided */
 	double* rss;  /* Residual sum of squares */
-	long K=0;       /* total number of terms */
-	long Kt=0;		/* total non residual terms */
+	int K=0;       /* total number of terms */
+	int Kt=0;		/* total non residual terms */
 	double pt;
 	int i;
 	int j;
@@ -738,8 +737,8 @@ void permuteSPR(
 	int u2;
 	int iter;
 	double temp;
-	long crita;
-	long critr;
+	int crita;
+	int critr;
 	double y;
 	double x;
 	double y1;
@@ -749,7 +748,7 @@ void permuteSPR(
 	double delta;
 	bool nToDo; /* number of sources not decided */
 	bool useF=true;  /* Use F ratio instead of SS */
-	long nSe=nS-1;
+	int nSe=nS-1;
 
 	int l;
 	double* Yp;
@@ -757,15 +756,15 @@ void permuteSPR(
 	double* oSSp;
 	double* obSqp;
 	double* SSp;
-	long* dp;
-	long* dtp;
+	int* dp;
+	int* dtp;
 	double* Pp;
 	double* Ptp;
-	long* acceptp;
+	int* acceptp;
 	int* acceptCp;
-	long* accepttp;
-	long* Mnp;
-	long* Mntp;
+	int* accepttp;
+	int* Mnp;
+	int* Mntp;
 
 
 	for (i=0;i<nS;i++) /* find number of columns in Q */
@@ -782,10 +781,10 @@ void permuteSPR(
 
 	SS=(double *)S_alloc(nc*nS,sizeof(double));  /* These should be zeroed as allocated */
 	oSS=(double *)S_alloc(nc*nS,sizeof(double)); 
-	d=(long *)S_alloc(nc*nSe,sizeof(long));
+	d=(int *)S_alloc(nc*nSe,sizeof(int));
 	b=(double *)S_alloc(nc*K,sizeof(double));
 	obSq=(double *)S_alloc(nc*K,sizeof(double));
-	dt=(long *)S_alloc(nc*Kt,sizeof(long));
+	dt=(int *)S_alloc(nc*Kt,sizeof(int));
 	acceptC=(int *)S_alloc(nc*nS,sizeof(int));
 	rss=(double *)S_alloc(nc,sizeof(double));
 

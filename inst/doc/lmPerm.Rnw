@@ -421,7 +421,7 @@ cubic & $X_1+X_2+X_3+X_1X_2+X_1X_2+X_2X_3+$\\
 linear&{\tt X1+X1+X3 -1}\\ \hline
 quadratic&{\tt  (X1+X2+X3)\verb+^+2 -1}\\ \hline
 special cubic & {\tt (X1+X2+X3)\verb+^+3 -1}\\ \hline
-cubic& {\tt poly.formula(\verb+~+cubicS(X1,X2,X3) -1)}\\ \hline
+cubic& {\tt poly.formula(Y\verb+~+cubicS(X1,X2,X3) -1)}\\ \hline
 
 \end{tabular}
 \label{tab:ScheffeModels}

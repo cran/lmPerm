@@ -19,9 +19,9 @@ may be used.
 All agruments to quad(), cubic(), and cubicS() must be numeric.
 
 \itemize{
-	\item quad(A,B,C) makes \eqn{~(A+B+C)^2+I(A^2)+I(B^2)+I(C^2)}
-	\item cubic(A,B,C) makes \eqn{~(A+B+C)^3+I(A^2)+I(B^2)+I(C^2)+I(A^3)+I(B^3)+I(C^3)}
- 	\item cubicS(A,B,C) makes \eqn{~(A+B+C)^3+I(A*B*(A-B))+I(A*C*(A-C))+I(B*C*(B-C))}
+	\item quad(A,B,C) makes \eqn{(A+B+C)^2+I(A^2)+I(B^2)+I(C^2)}
+	\item cubic(A,B,C) makes \eqn{(A+B+C)^3+I(A^2)+I(B^2)+I(C^2)+I(A^3)+I(B^3)+I(C^3)}
+ 	\item cubicS(A,B,C) makes \eqn{(A+B+C)^3+I(A*B*(A-B))+I(A*C*(A-C))+I(B*C*(B-C))}
 }
 
 The cubicS() function produces a non-singular representation of a cubic model, when the 
