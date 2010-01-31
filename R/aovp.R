@@ -90,7 +90,20 @@ function (formula, data = NULL, perm="Exact", seqs=FALSE, center=TRUE,projection
 		sourcenames<-gsub("(\\.L|\\.Q|\\.C|\\^[0-9]*)($|:)","\\2",sourcenames) # remove contr.poly names
 		sourcenames
 	}
-	
+
+# cleanCoef **************************************
+	cleanCoef<-function(coef) {
+		if (is.vector(coef))
+			coefNames<-names(coef)
+		else
+			coefNames<-rownames(coef)
+		coefNames<-gsub("#([0-9]*)","\\1",coefNames)
+		if (is.vector(coef)) 
+			names(coef)<-coefNames
+		else
+			rownames(coef)<-coefNames
+		coef
+	}	
 
 # begin program ************************************
 
@@ -122,6 +135,7 @@ function (formula, data = NULL, perm="Exact", seqs=FALSE, center=TRUE,projection
     else terms(formula, "Error", data = data)
 
     indError <- attr(Terms, "specials")$Error
+
     if (length(indError) > 1) 
         stop(sprintf(ngettext(length(indError), "there are %d Error terms: only 1 is allowed", 
             "there are %d Error terms: only 1 is allowed"), length(indError)), 
@@ -159,6 +173,8 @@ function (formula, data = NULL, perm="Exact", seqs=FALSE, center=TRUE,projection
 #        opcons <- options("contrasts")
 #        options(contrasts = c("contr.helmert", "contr.poly")) 
 #       on.exit(options(opcons))
+		if (!missing(data)) # REW This makes data avail for lhs multiple columns when multResp() is used
+			attach(data,warn.conflicts=FALSE)    # REW
         allTerms <- Terms
         errorterm <- attr(Terms, "variables")[[1 + indError]]
         eTerm <- deparse(errorterm[[2]], width = 500, backtick = TRUE) # the name of the error term
@@ -197,6 +213,7 @@ function (formula, data = NULL, perm="Exact", seqs=FALSE, center=TRUE,projection
 
 		lmcall$formula<-form <- update(formula, paste(". ~ .-", 
             deparse(errorterm, width = 500, backtick = TRUE))) # Remove error term to get the within formula.
+ 
         Terms <- terms(form)
 
         lmcall$method <- "model.frame"
@@ -382,7 +399,7 @@ function (formula, data = NULL, perm="Exact", seqs=FALSE, center=TRUE,projection
 			}
 			if (!is.null(fiti$terms))
 				attr(fiti$terms,"term.labels")<-sourcenames	
-																		
+			fiti$coefficients<-cleanCoef(fiti$coefficients)	
 #REW end
 			result[[i]] <- fiti
         }

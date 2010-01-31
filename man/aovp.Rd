@@ -140,7 +140,7 @@ The variables inside the \code{Error()} term are treated in the order given. Thu
 \code{Error(A+B)} will usually produce components in the order A,B, with B orthogonalized
 with respect to A. This may cause confusion for unbalanced block structures.
 
-This function will behave identically to \code{lm()} if the following parameters are set:
+This function will behave identically to \code{aov()} if the following parameters are set:
 \code{perm="", seq=TRUE, center=FALSE}.
 
 }
@@ -211,6 +211,9 @@ data(Federer276)
 summary(aovp(Plants~Variety*Treatment+Error(Rep/Plot),Federer276))
 data(Federer276Numeric)
 summary(aovp(poly.formula(Plants~quad(Variety,Treatment)+Error(Rep/Plot)),Federer276Numeric))
+# The coefficients and their p-values may be obtained by
+summaryC(aovp(Plants~Variety*Treatment+Error(Rep/Plot),Federer276))
+
 
 }
 

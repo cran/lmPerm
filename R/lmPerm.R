@@ -109,11 +109,11 @@ function (object, correlation = FALSE, symbolic.cor = FALSE, ...)
 }
 
 # Cycle through multiple responses
-"summary.mlmp" <-
+summary.mlmp<-
 function(object, ...)
 {
     coef <- coef(object)
-    ny <- ncol(coef)
+    ny <- NCOL(coef)
 ## Not right:    if(is.null(ny)) return(NextMethod("summary"))
     effects <- object$effects
     resid <- residuals(object)
@@ -154,7 +154,8 @@ function(object, ...)
 		object$residuals <- resid[, i]
 		object$fitted.values <- fitted[, i]
 		object$effects <- effects[, i]
-		object$call$formula[[2]] <- object$terms[[2]] <- as.name(ynames[i])
+#		object$call$formula[[2]] <- object$terms[[2]] <- as.name(ynames[i]) # REW deleted
+#					this is apparently only used for decoration.
 		if (doPerm) {
 			object$perm$P<-as.vector(P[,i])                     #REW begin
 			object$perm$Pt<-as.vector(Pt[,i])
@@ -172,7 +173,6 @@ function(object, ...)
     class(value) <- "listof"
     value
 }
-
 
 
 "print.summary.lmp" <-
