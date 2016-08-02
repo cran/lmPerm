@@ -8,8 +8,9 @@ theory tests. Like \code{aov}, the ANOVA model is fitted by a call to \code{\lin
 stratum. Timing differences between \code{aovp} and \code{aov} are negligible.} 
 
 \usage{
-aovp(formula, data = NULL, perm="Exact", seqs=FALSE, center=TRUE, projections = FALSE, qr = TRUE,
-    contrasts = NULL, ...)
+aovp(formula, data = NULL, perm="Exact", seqs=FALSE, 
+              center=TRUE, projections = FALSE, qr = TRUE,
+              contrasts = NULL, ...)
 }
 
 \arguments{

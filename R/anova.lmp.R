@@ -2,7 +2,8 @@ anova.lmp<-
 function(object, ...)
 {
     if(length(list(object, ...)) > 1)
-	return(anova.lmlist(object, ...))
+      stop("The first argument cannot be an array or list.")
+	    #return(anova.lmlist(object, ...))
 #REW
 	mo<-NCOL(object$resid)
 	if (mo>1)

@@ -9,7 +9,7 @@ function (frml)
         fixup <- if (is.null(nm)) 
             seq(along = dots)
         else nm == ""
-        dep <- sapply(dots[fixup], function(x) deparse(x, width = 500)[1])
+        dep <- sapply(dots[fixup], function(x) deparse(x, width.cutoff = 500)[1])
         if (is.null(nm)) 
             nm <- dep
         else {
@@ -27,7 +27,7 @@ function (frml)
             1:nVars, "^2)", sep = "", collapse = "+"))
         for (i in 1:nVars) {
             ag <- paste("X", i, sep = "")
-            strg <- gsub(ag, repl = nms[i], strg)
+            strg <- gsub(ag, replacement = nms[i], strg)
         }
         strg
     }
@@ -40,7 +40,7 @@ function (frml)
             1:nVars, "^3)", sep = "", collapse = "+"))
         for (i in 1:nVars) {
             ag <- paste("X", i, sep = "")
-            strg <- gsub(ag, repl = nms[i], strg)
+            strg <- gsub(ag, replacement = nms[i], strg)
         }
         strg
     }
@@ -58,7 +58,7 @@ function (frml)
         }
         for (i in 1:nVars) {
             ag <- paste("X", i, sep = "")
-            strg <- gsub(ag, repl = nms[i], strg)
+            strg <- gsub(ag, replacement = nms[i], strg)
         }
         strg
     }
@@ -71,7 +71,7 @@ function (frml)
             return(c(0, 0))
         c(strt, strt + fin - 1)
     }
-    frml <- deparse(frml, width = 500)
+    frml <- deparse(frml, width.cutoff = 500)
     while ((0 != (pos <- findFunction("quad", frml))[1]) || (0 != 
         (pos <- findFunction("cubicS", frml))[1]) || (0 != (pos <- findFunction("cubic", 
         frml))[1])) {

@@ -9,14 +9,14 @@
 \title{Summarizing functions for linear models}
 \description{Replaces corresponding functions in base package.}
 \usage{
-summary.lmp(object, correlation = FALSE, symbolic.cor = FALSE, ...)
-summary.mlmp(object, ...)
-print.summary.lmp(x, digits = max(3, getOption("digits") - 3),
+\method{summary}{lmp}(object, correlation = FALSE, symbolic.cor = FALSE, ...)
+\method{summary}{mlmp}(object, ...)
+\method{print}{summary.lmp}(x, digits = max(3, getOption("digits") - 3),
               symbolic.cor = x$symbolic.cor,
 	      signif.stars= getOption("show.signif.stars"),	...)
-summary.aovp(object, intercept = FALSE, split,
+\method{summary}{aovp}(object, intercept = FALSE, split,
                         expand.split = TRUE, keep.zero.df = TRUE, ...)
-anova.lmp(object, ...)
+\method{anova}{lmp}(object, ...)
 }
 \arguments{ Same as for the corresponding functions in base package:
 
