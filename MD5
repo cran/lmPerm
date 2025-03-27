@@ -1,4 +1,4 @@
-88dd8be65659e01e14c14e730ea84744 *DESCRIPTION
+4c24814171139bb0f34a08f69e7abc3c *DESCRIPTION
 8f0c7ef56ef0d55d4a65099fe77d7090 *NAMESPACE
 8cb50bdf87ca8f50ca53572c2a5a629d *R/anova.lmp.R
 d622c06b7f2483c38d051f4c3eef0b76 *R/aovp.R
@@ -9,8 +9,8 @@ d622c06b7f2483c38d051f4c3eef0b76 *R/aovp.R
 6fd791621623695b4e0b6bff73fcf83c *R/poly.formula.R
 5210622632751ded6cc8ab9a82e17470 *R/summary.aovp.R
 fd92c67f9dc54b0a524347ed809d5c69 *R/summaryC.R
-412edebc842238394676c7c2c5718774 *README.md
-f3ab7ea62ee9bdcb7f2421d399b3f25c *build/vignette.rds
+d7ba2420739ad0605a8f1a01f350a8cb *README.md
+f8cc2db6fc81af3c25e97e9eb5247ef0 *build/vignette.rds
 f99547dea1095685d5857fe5ba1967cd *data/Alfalfa.rda
 4b0bd37974cc4a93ba25f70d334af433 *data/CC164.rda
 ff69fb5b824064d86efa1b59daa6c1ea *data/Federer276.rda
@@ -29,7 +29,7 @@ ff1747756c18b6bc9dd1659bed2e21ae *data/simDesign.rda
 266ab969e87b78e93bd05a8daec5b2e6 *data/wool.rda
 5795852c23f94238d0f3bb21424a2358 *inst/doc/lmPerm.R
 ac27a0466fdac349abfa56404376883a *inst/doc/lmPerm.Rnw
-a96d442bcdefc78bcfde3fc36fd7694e *inst/doc/lmPerm.pdf
+74f49a8dc703305c27b02ae5764111e4 *inst/doc/lmPerm.pdf
 19cbc7b4fc7dc28ccabd08d149ecb7eb *man/Alfalfa.Rd
 1ba665f89235924d7fbe8a4c6ead8d85 *man/CC164.Rd
 ec7cc116feb2207a814d0b7c135baffd *man/Federer276.Rd
@@ -45,17 +45,17 @@ a8dbf31fbc60482ff166d163b05f8040 *man/lmPerm-Internal.Rd
 2877e21cde9cf12f765b2f2c76fd7a6e *man/lmp.Rd
 3bbf33f39053e14ef0e8e59d1dacef63 *man/manly126.Rd
 297bd4c9d5c54c982bf3f53066624398 *man/manly136.Rd
-143baba8570268077846398473accb4d *man/multResp.Rd
+5ab3a63b590f6a8b5028d5d620088f8e *man/multResp.Rd
 6d6966121d463ec29c538a1dc2192694 *man/permute.Rd
-503a2d0edcc31fe98a95a89a47bf2bd9 *man/poly.formula.Rd
+bc6a5fa1e1c16c4d160f1e71b35e722c *man/poly.formula.Rd
 9ee24e068cd774f7306690a8ca6c37b5 *man/ratGenotype.Rd
 295002f7623b95871f7d78cc0882dbd7 *man/simDesign.Rd
 45381abcac6f98889c109c4615ceb661 *man/simDesignPartNumeric.Rd
 ebd8a1e9ec835bea9ff1c58cde6df1b1 *man/summary.Rd
 043679e1e96c218c76166479353cd0a8 *man/summaryC.Rd
 696a9f299b3c9ab1d26c8fb4006e3a24 *man/wool.Rd
-7bb5f444d034a394e664044b261e038c *src/lmPerm.c
-57aa3635056fbf85a6b5d32e65fae157 *src/wheeler.h
+15c8a7e69adf214bb031499cc2af9bb2 *src/lmPerm.c
+fc105a694b6b4be66091febb5b77378f *src/wheeler.h
 dad36d7327a4b58bf0c771572c8c450c *tests/testthat.R
 26db290f242ef481b5f55da98d764387 *tests/testthat/testlmp.R
 f39364edb2a6c5d98584fb396a136769 *vignettes/GeneralBib.bib
